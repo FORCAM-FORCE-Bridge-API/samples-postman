@@ -10,43 +10,12 @@
 			"name": "workplaces",
 			"item": [
 				{
-					"name": "{workplace Id}",
-					"item": [
-						{
-							"name": "Retrieve a workplace.",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/workplaces/:workplaceId",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"workplaces",
-										":workplaceId"
-									],
-									"variable": [
-										{
-											"key": "workplaceId",
-											"value": "<string>",
-											"description": "(Required) UUID of a workplace"
-										}
-									]
-								},
-								"description": "Information is returned for domain-specific identification of the workplace and about its current state. Information on the operations that are currently being executed at the workplace can be embedded (embed=currentOperations). In addition, most sub-resources of the workplace can be embedded."
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Retrieve the collection of workplaces.",
+					"name": "GetWorkplaces",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/workplaces?limit=100",
+							"raw": "{{baseUrl}}/workplaces?limit=10",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -59,11 +28,6 @@
 									"value": null,
 									"description": "Universally unique identifier of the ERP context in which the workplace number is a unique identifier for a workplace or a workplace group. In SAP ERP, for example, this context is defined by the client, the company code, and the plant",
 									"disabled": true
-								},
-								{
-									"key": "limit",
-									"value": "100",
-									"description": "Size of the requested page"
 								},
 								{
 									"key": "offset",
@@ -94,6 +58,33 @@
 									"value": null,
 									"description": "The type of workplace.",
 									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetWorkplaceByNumber",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/workplaces?workplaceNumber=G550-1071",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"workplaces"
+							],
+							"query": [
+								{
+									"key": "workplaceNumber",
+									"value": "G550-1071"
 								}
 							]
 						}
@@ -106,69 +97,30 @@
 			"name": "masterData",
 			"item": [
 				{
-					"name": "Retrieve the collection of operating states.",
+					"name": "GetOperatingStates",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/masterData/operatingStates",
+							"raw": "{{baseUrl}}/masterData/operatingStates?limit=10",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"masterData",
 								"operatingStates"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								}
 							]
 						}
 					},
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "Retrieve the entry point of FORCE Bridge API.",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						""
-					]
-				},
-				"description": "Retrieve the top level resources of FORCE Bridge API."
-			},
-			"response": []
-		},
-		{
-			"name": "Notify Applications about a certain event.",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"eventType\": \"<string>\",\n    \"data\": \"<object>\",\n    \"eventName\": \"<string>\",\n    \"objectId\": \"<string>\",\n    \"objectType\": \"<string>\",\n    \"timestamp\": \"<dateTime>\"\n}"
-				},
-				"url": {
-					"raw": "{{baseUrl}}/events",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"events"
-					]
-				},
-				"description": "This POST method allows for informing about a specific event. Any application registered for the corresponding callback will be notified of the event."
-			},
-			"response": []
 		},
 		{
 			"name": "Authentication",
@@ -179,9 +131,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{authUrl}}?client_id=GitHub&client_secret=GitHub&grant_type=client_credentials&scope=read%20write",
+					"raw": "{{urlToken}}?client_id=GitHub&client_secret=GitHub&grant_type=client_credentials&scope=read%20write",
 					"host": [
-						"{{authUrl}}"
+						"{{urlToken}}"
 					],
 					"query": [
 						{
@@ -207,7 +159,14 @@
 		}
 	],
 	"auth": {
-		"type": "bearer"
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "",
+				"type": "string"
+			}
+		]
 	},
 	"event": [
 		{
@@ -235,7 +194,7 @@
 			"value": "{{serverUrl}}/api/v3"
 		},
 		{
-			"key": "authUrl",
+			"key": "urlToken",
 			"value": "https://forcebridgehackathon.force.eco:25443/ffauth/oauth2.0/accessToken"
 		},
 		{
