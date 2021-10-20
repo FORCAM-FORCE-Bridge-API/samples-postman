@@ -14,14 +14,17 @@ If you have any questions look at https://forcebridge.io/en/qa-portal/
 
 _If you need access to a demo system please contact forcebridge@forcam.com._
 
-Please add your URL, user and password of your Bridge API instance to the variables below (contained by all samples).
+Please add your URL, user and password of your Bridge API instance to the variables below.
 
 ```Postman
 
-String client_id; // YOUR USER (e.g. GitHub)
-String clinet_secret; // YOUR PASSWORD (e.g. GitHub)
-String urlToken = ""; // YOUR URL (e.g. https://forcebridgehackathon.force.eco:24443/ffwebservices/)
+client_id // YOUR USER (e.g. GitHub)
+client_secret // YOUR PASSWORD (e.g. GitHub)
+urlServer // YOUR URL (e.g. https://forcebridgehackathon.force.eco:24443/ffwebservices/)
+urlToken // YOUR URL (e.g. https://forcebridgehackathon.force.eco:25443/ffauth)
 ```
+
+![Image](Assets/CollectionSettings.png)
 
 ###### Framework & Tool
 

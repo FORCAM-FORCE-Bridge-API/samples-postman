@@ -131,18 +131,18 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{urlToken}}?client_id=GitHub&client_secret=GitHub&grant_type=client_credentials&scope=read%20write",
+					"raw": "{{urlToken}}?client_id={{client_id}}&client_secret={{client_secret}}&grant_type=client_credentials&scope=read%20write",
 					"host": [
 						"{{urlToken}}"
 					],
 					"query": [
 						{
 							"key": "client_id",
-							"value": "GitHub"
+							"value": "{{client_id}}"
 						},
 						{
 							"key": "client_secret",
-							"value": "GitHub"
+							"value": "{{client_secret}}"
 						},
 						{
 							"key": "grant_type",
@@ -191,15 +191,23 @@
 	"variable": [
 		{
 			"key": "baseUrl",
-			"value": "{{serverUrl}}/api/v3"
+			"value": "{{urlServer}}/api/v3"
+		},
+		{
+			"key": "urlServer",
+			"value": "https://forcebridgehackathon.force.eco:24443/ffwebservices"
 		},
 		{
 			"key": "urlToken",
 			"value": "https://forcebridgehackathon.force.eco:25443/ffauth/oauth2.0/accessToken"
 		},
 		{
-			"key": "serverUrl",
-			"value": "https://forcebridgehackathon.force.eco:24443/ffwebservices"
+			"key": "client_id",
+			"value": "GitHub"
+		},
+		{
+			"key": "client_secret",
+			"value": "GitHub"
 		}
 	]
 }
